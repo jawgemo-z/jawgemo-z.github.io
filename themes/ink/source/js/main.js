@@ -1,14 +1,13 @@
 (function () {
   var root = document.documentElement;
   var btn = document.querySelector('.theme-btn');
-  var media = window.matchMedia('(prefers-color-scheme: dark)');
 
   function saved() {
     try { return localStorage.getItem('theme'); } catch (e) { return null; }
   }
 
   function current() {
-    return saved() || (media.matches ? 'dark' : 'light');
+    return saved() || 'dark';
   }
 
   function sync() {
@@ -24,11 +23,4 @@
       sync();
     });
   }
-
-  media.addEventListener('change', function () {
-    if (!saved()) {
-      root.removeAttribute('data-theme');
-      sync();
-    }
-  });
 })();

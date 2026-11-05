@@ -1,39 +1,26 @@
 :root {
-  --bg: #fbfaf7;
-  --surface: #f4f2ec;
-  --text: #211f1c;
-  --text-2: #6d675f;
-  --text-3: #9a938a;
-  --line: #e7e3da;
-  --line-strong: #d6d0c4;
-  --accent: #a9492e;
+  --bg: #0b0f14;
+  --surface: #131920;
+  --text: #e6edf3;
+  --text-2: #93a1b1;
+  --text-3: #6d7b8a;
+  --line: #1f2630;
+  --line-strong: #2d3744;
+  --accent: #4cc9f0;
   --maxw: 720px;
   --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Source Han Sans SC", sans-serif;
-  --mono: ui-monospace, SFMono-Regular, Menlo, Consolas, "Courier New", monospace;
+  --mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;
 }
 
-html[data-theme="dark"] {
-  --bg: #161513;
-  --surface: #1e1c19;
-  --text: #e9e5dd;
-  --text-2: #a39b90;
-  --text-3: #736c63;
-  --line: #2b2823;
-  --line-strong: #3b3731;
-  --accent: #e0855f;
-}
-
-@media (prefers-color-scheme: dark) {
-  html:not([data-theme="light"]) {
-    --bg: #161513;
-    --surface: #1e1c19;
-    --text: #e9e5dd;
-    --text-2: #a39b90;
-    --text-3: #736c63;
-    --line: #2b2823;
-    --line-strong: #3b3731;
-    --accent: #e0855f;
-  }
+html[data-theme="light"] {
+  --bg: #f8fafc;
+  --surface: #eef2f7;
+  --text: #0f1720;
+  --text-2: #56667a;
+  --text-3: #8b98a8;
+  --line: #e2e8f0;
+  --line-strong: #cbd5e1;
+  --accent: #0b72c4;
 }
 
 * { box-sizing: border-box; }
@@ -45,7 +32,9 @@ html {
 
 body {
   margin: 0;
-  background: var(--bg);
+  background-color: var(--bg);
+  background-image: radial-gradient(70% 300px at 50% 0%, rgba(76, 201, 240, .07), transparent 70%);
+  background-repeat: no-repeat;
   color: var(--text);
   font-family: var(--sans);
   font-size: 16px;
@@ -82,6 +71,17 @@ img { max-width: 100%; height: auto; }
   font-weight: 500;
   letter-spacing: .02em;
   transition: color .18s;
+}
+
+.brand::before {
+  content: "";
+  display: inline-block;
+  width: 3px;
+  height: 13px;
+  margin-right: 10px;
+  background: var(--accent);
+  border-radius: 2px;
+  vertical-align: -2px;
 }
 
 .brand:hover { color: var(--accent); }
@@ -158,11 +158,12 @@ img { max-width: 100%; height: auto; }
 .entry:last-child { border-bottom: 0; }
 
 .entry-date {
-  font-size: 12.5px;
+  font-family: var(--mono);
+  font-size: 12px;
   color: var(--text-3);
-  letter-spacing: .04em;
+  letter-spacing: .02em;
   font-variant-numeric: tabular-nums;
-  padding-top: 5px;
+  padding-top: 6px;
 }
 
 .entry-title {
@@ -198,9 +199,9 @@ img { max-width: 100%; height: auto; }
 .pager-link:hover { color: var(--accent); }
 
 .pager-count {
-  font-size: 12.5px;
+  font-family: var(--mono);
+  font-size: 12px;
   color: var(--text-3);
-  font-variant-numeric: tabular-nums;
 }
 
 .page-head {
@@ -224,12 +225,12 @@ img { max-width: 100%; height: auto; }
 .year-group { margin-top: 42px; }
 
 .year-label {
-  font-size: 12.5px;
+  font-family: var(--mono);
+  font-size: 12px;
   font-weight: 500;
   color: var(--text-3);
-  letter-spacing: .1em;
+  letter-spacing: .12em;
   margin: 0 0 12px;
-  font-variant-numeric: tabular-nums;
 }
 
 .year-item {
@@ -242,7 +243,8 @@ img { max-width: 100%; height: auto; }
 }
 
 .year-item time {
-  font-size: 12.5px;
+  font-family: var(--mono);
+  font-size: 12px;
   color: var(--text-3);
   font-variant-numeric: tabular-nums;
 }
@@ -261,9 +263,9 @@ img { max-width: 100%; height: auto; }
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  padding: 6px 14px;
+  padding: 5px 11px;
   background: var(--surface);
-  border-radius: 999px;
+  border-radius: 4px;
   font-size: 14px;
   transition: background .18s;
 }
@@ -299,6 +301,12 @@ img { max-width: 100%; height: auto; }
   font-size: 13px;
   color: var(--text-3);
   line-height: 1.7;
+}
+
+.post-meta time {
+  font-family: var(--mono);
+  font-size: 12.5px;
+  letter-spacing: .02em;
 }
 
 .tag { transition: color .18s; }
@@ -374,7 +382,7 @@ img { max-width: 100%; height: auto; }
 .post-content img {
   display: block;
   margin: 1.6em auto;
-  border-radius: 8px;
+  border-radius: 4px;
 }
 
 .post-content code {
@@ -382,7 +390,7 @@ img { max-width: 100%; height: auto; }
   font-size: .875em;
   background: var(--surface);
   padding: 2px 6px;
-  border-radius: 4px;
+  border-radius: 3px;
 }
 
 .post-content pre {
@@ -390,7 +398,7 @@ img { max-width: 100%; height: auto; }
   padding: 16px 18px;
   background: var(--surface);
   border: 1px solid var(--line);
-  border-radius: 10px;
+  border-radius: 6px;
   overflow-x: auto;
   font-size: 13.5px;
   line-height: 1.7;
@@ -444,7 +452,7 @@ img { max-width: 100%; height: auto; }
   gap: 7px;
   padding: 15px 18px;
   background: var(--surface);
-  border-radius: 10px;
+  border-radius: 6px;
   transition: background .18s;
 }
 
