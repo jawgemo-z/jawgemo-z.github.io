@@ -12,7 +12,7 @@ timezone: Asia/Shanghai
 
 # URL
 ## 部署后把这里换成你的真实地址，例如 https://yourname.github.io
-url: https://example.com
+url: https://keyanzhang491-boop.github.io
 permalink: :year/:month/:day/:title/
 permalink_defaults:
 pretty_urls:
