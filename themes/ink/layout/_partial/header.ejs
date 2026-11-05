@@ -1,0 +1,10 @@
+<header class="site-head">
+  <a class="brand" href="<%- url_for('/') %>"><%= config.title || '未命名' %></a>
+  <nav class="nav">
+    <% Object.keys(theme.menu || {}).forEach(function (label) { %>
+      <% var target = theme.menu[label]; %>
+      <a href="<%- url_for(target) %>"<%- is_current(target) ? ' class="on"' : '' %>><%= label %></a>
+    <% }); %>
+    <button class="theme-btn" type="button" aria-label="切换深浅色">深色</button>
+  </nav>
+</header>

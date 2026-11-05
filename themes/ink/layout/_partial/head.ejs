@@ -1,0 +1,24 @@
+<%
+  var siteName = config.title || '未命名';
+  var pageTitle = (page.title && !is_home())
+    ? page.title + ' · ' + siteName
+    : siteName + (theme.subtitle ? ' · ' + theme.subtitle : '');
+  var desc = page.excerpt
+    ? strip_html(page.excerpt).substring(0, 120)
+    : (config.description || (theme.subtitle || ''));
+  var canonPath = is_home() ? '/' : (page.path || '/');
+%>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <title><%= pageTitle %></title>
+  <meta name="description" content="<%= desc %>">
+  <% if (config.author) { %><meta name="author" content="<%= config.author %>"><% } %>
+  <meta property="og:title" content="<%= pageTitle %>">
+  <meta property="og:description" content="<%= desc %>">
+  <meta property="og:type" content="<%= is_post() ? 'article' : 'website' %>">
+  <% if (page.date) { %><meta property="article:published_time" content="<%= date(page.date, 'YYYY-MM-DD') %>"><% } %>
+  <link rel="icon" type="image/svg+xml" href="<%- url_for('/img/favicon.svg') %>">
+  <link rel="canonical" href="<%= config.url %><%- url_for(canonPath) %>">
+  <link rel="alternate" type="application/atom+xml" title="<%= siteName %>" href="<%- url_for('/atom.xml') %>">
+  <link rel="stylesheet" href="<%- url_for('/css/style.css') %>">

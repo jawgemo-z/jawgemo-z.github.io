@@ -1,0 +1,11 @@
+<section class="hero">
+  <h1 class="hero-title"><%= theme.subtitle || config.description || '' %></h1>
+  <p class="hero-meta">
+    已写下 <%= site.posts.length %> 篇
+    <% if (site.posts.length) { %>
+      <span class="sep">·</span> 最近更新 <%= date(site.posts.first().date, 'YYYY.MM.DD') %>
+    <% } %>
+  </p>
+</section>
+
+<%- partial('_partial/post-list') %>

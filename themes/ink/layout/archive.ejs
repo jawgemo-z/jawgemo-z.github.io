@@ -1,0 +1,40 @@
+<%
+  var posts = page.posts.toArray();
+  var groups = {};
+  var order = [];
+  posts.forEach(function (p) {
+    var y = date(p.date, 'YYYY');
+    if (!groups[y]) { groups[y] = []; order.push(y); }
+    groups[y].push(p);
+  });
+  var heading = '归档';
+  if (page.year && page.month) heading = page.year + ' 年 ' + page.month + ' 月';
+  else if (page.year) heading = page.year + ' 年';
+%>
+
+<header class="page-head">
+  <h1 class="page-title"><%= heading %></h1>
+  <p class="page-meta">共 <%= site.posts.length %> 篇，按时间从新到旧</p>
+</header>
+
+<% order.forEach(function (y) { %>
+<section class="year-group">
+  <% if (!page.year) { %><h2 class="year-label"><%= y %></h2><% } %>
+  <div class="year-list">
+    <% groups[y].forEach(function (post) { %>
+    <div class="year-item">
+      <time datetime="<%= date(post.date, 'YYYY-MM-DD') %>"><%= date(post.date, 'MM.DD') %></time>
+      <a href="<%- url_for(post.path) %>"><%= post.title %></a>
+    </div>
+    <% }); %>
+  </div>
+</section>
+<% }); %>
+
+<% if (page.total > 1) { %>
+<nav class="pager">
+  <% if (page.prev) { %><a class="pager-link" href="<%- url_for(page.prev_link) %>">← 更新的</a><% } else { %><span></span><% } %>
+  <span class="pager-count"><%= page.current %> / <%= page.total %></span>
+  <% if (page.next) { %><a class="pager-link" href="<%- url_for(page.next_link) %>">更早的 →</a><% } else { %><span></span><% } %>
+</nav>
+<% } %>

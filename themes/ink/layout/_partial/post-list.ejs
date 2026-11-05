@@ -1,0 +1,28 @@
+<div class="list">
+<% page.posts.each(function (post) { %>
+  <%
+    var raw = post.excerpt || post.content || '';
+    var plain = strip_html(raw).replace(/\s+/g, ' ').trim();
+    if (plain.length > 120) plain = plain.substring(0, 120) + '…';
+  %>
+  <article class="entry">
+    <time class="entry-date" datetime="<%= date(post.date, 'YYYY-MM-DD') %>"><%= date(post.date, 'YYYY.MM.DD') %></time>
+    <div class="entry-main">
+      <h2 class="entry-title"><a href="<%- url_for(post.path) %>"><%= post.title %></a></h2>
+      <% if (plain) { %><p class="entry-excerpt"><%= plain %></p><% } %>
+    </div>
+  </article>
+<% }); %>
+</div>
+
+<% if (page.total > 1) { %>
+<nav class="pager">
+  <% if (page.prev) { %>
+    <a class="pager-link" href="<%- url_for(page.prev_link) %>">← 更新的</a>
+  <% } else { %><span></span><% } %>
+  <span class="pager-count"><%= page.current %> / <%= page.total %></span>
+  <% if (page.next) { %>
+    <a class="pager-link" href="<%- url_for(page.next_link) %>">更早的 →</a>
+  <% } else { %><span></span><% } %>
+</nav>
+<% } %>

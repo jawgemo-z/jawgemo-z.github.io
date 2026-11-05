@@ -1,0 +1,41 @@
+<article class="post">
+  <header class="post-head">
+    <h1 class="post-title"><%= page.title %></h1>
+    <p class="post-meta">
+      <time datetime="<%= date(page.date, 'YYYY-MM-DD') %>"><%= date(page.date, 'YYYY.MM.DD') %></time>
+      <% if (page.tags && page.tags.length) { %>
+        <% page.tags.each(function (tag) { %>
+          <span class="sep">·</span><a class="tag" href="<%- url_for(tag.path) %>"><%= tag.name %></a>
+        <% }); %>
+      <% } %>
+      <% if (page.updated && date(page.updated, 'YYYY-MM-DD') !== date(page.date, 'YYYY-MM-DD')) { %>
+        <span class="sep">·</span><span>修订于 <%= date(page.updated, 'YYYY.MM.DD') %></span>
+      <% } %>
+    </p>
+  </header>
+
+  <div class="post-content">
+    <%- page.content %>
+  </div>
+
+  <% if (theme.license) { %>
+    <p class="post-license"><%= theme.license %></p>
+  <% } %>
+</article>
+
+<% if (page.prev || page.next) { %>
+<nav class="post-nav">
+  <% if (page.prev) { %>
+    <a class="post-nav-item" href="<%- url_for(page.prev.path) %>">
+      <span class="post-nav-dir">← 上一篇</span>
+      <span class="post-nav-title"><%= page.prev.title %></span>
+    </a>
+  <% } else { %><span class="post-nav-item is-empty"></span><% } %>
+  <% if (page.next) { %>
+    <a class="post-nav-item is-next" href="<%- url_for(page.next.path) %>">
+      <span class="post-nav-dir">下一篇 →</span>
+      <span class="post-nav-title"><%= page.next.title %></span>
+    </a>
+  <% } else { %><span class="post-nav-item is-empty"></span><% } %>
+</nav>
+<% } %>

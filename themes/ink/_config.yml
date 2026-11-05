@@ -1,0 +1,19 @@
+# 「墨」主题配置
+
+menu:
+  首页: /
+  归档: /archives/
+  标签: /tags/
+  关于: /about/
+
+# 首页顶部的一句话
+subtitle: 每天记一点，慢慢就厚了。
+
+# 页脚
+footer_text: 写字的地方
+
+# 首页每页显示篇数
+per_page: 12
+
+# 版权声明（文章底部）
+license: 本文采用 CC BY-NC-SA 4.0 协议，转载请注明出处。
