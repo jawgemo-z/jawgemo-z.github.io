@@ -24,7 +24,7 @@
 </article>
 
 <% if (page.prev || page.next) { %>
-<nav class="post-nav">
+<nav class="post-nav<%= (page.prev && page.next) ? '' : ' is-single' %>">
   <% if (page.prev) { %>
     <a class="post-nav-item" href="<%- url_for(page.prev.path) %>">
       <span class="post-nav-dir">← 上一篇</span>
